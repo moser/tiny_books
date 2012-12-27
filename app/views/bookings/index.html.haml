@@ -1,0 +1,17 @@
+= link_to "New", new_booking_path
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th= Booking.l(:booking_date)
+      %th= Booking.l(:voucher_number)
+      %th= Booking.l(:from_account)
+      %th= Booking.l(:to_account)
+      %th= Booking.l(:value)
+  %tbody
+    - @bookings.each do |booking| 
+      %tr.booking
+        %td= booking.booking_date
+        %td= booking.voucher_number
+        %td= format_account(booking.from_account)
+        %td= format_account(booking.to_account)
+        %td= format_currency(booking.value_f)

@@ -39,6 +39,7 @@ end
 group :test do
   gem "shoulda-matchers"
   gem "capybara"
+  gem "launchy"
   gem "factory_girl"
   gem "simplecov", :require => false
   gem "database_cleaner"

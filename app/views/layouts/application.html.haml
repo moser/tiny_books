@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %meta{ "http-equiv" => "content-type", "content" => "text/html;charset=UTF-8" }
+    %title
+      TinyBooks
+    = csrf_meta_tag
+    = stylesheet_link_tag 'application', :media => "all"
+    = javascript_include_tag 'application'
+  %body
+    .navbar-fixed-top
+      .navbar.navbar-inner
+        .container
+          %a.brand
+            TinyBooks
+          %ul.nav
+            %li= link_to "Bookings", bookings_path 
+            %li= link_to "Accounts", accounts_path 
+
+    - if flash[:notice]
+      .alert.alert-info
+        %button.close{ :type => "button", "data-dismiss" => "alert" } x
+        = flash[:notice]
+    - if flash[:success]
+      .alert.alert-success
+        %button.close{ :type => "button", "data-dismiss" => "alert" } x
+        = flash[:success]
+    - if flash[:error]
+      .alert.alert-error
+        %button.close{ :type => "button", "data-dismiss" => "alert" } x
+        = flash[:error]
+    .container
+      .row
+        .span12
+          = yield

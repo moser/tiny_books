@@ -14,6 +14,8 @@ Spork.prefork do
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+  FG = FactoryGirl
+
   RSpec.configure do |config|
     # ## Mock Framework
     #
@@ -29,7 +31,7 @@ Spork.prefork do
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false
     # instead of true.
-    config.use_transactional_fixtures = true
+    config.use_transactional_fixtures = false
 
     # If true, the base class of anonymous controllers will be inferred
     # automatically. This will be the default behavior in future versions of
@@ -41,10 +43,38 @@ Spork.prefork do
     # the seed, which is printed after each run.
     #     --seed 1234
     config.order = "random"
+
+    config.include Capybara::DSL, :type => :controller
+    config.include Capybara::DSL, :type => :request    
+    
+    config.include Devise::TestHelpers, :type => :controller
+
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
   end
 end
 
 Spork.each_run do
-  # This code will be run each time you run your specs.
+  # Load schema
+  ActiveRecord::Schema.verbose = false
+  load "#{Rails.root}/db/schema.rb"
+
+  # Load factories
+  Dir[Rails.root.join("spec/factories/**/*.rb")].each {|f| require f}
+
+  # Get coverage
+  require 'simplecov'
+  SimpleCov.start "rails" do
+    add_filter "/spec/"
+  end
 
 end

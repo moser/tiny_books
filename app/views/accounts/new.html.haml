@@ -1,0 +1,5 @@
+= simple_form_for(@account) do |f|
+  = f.input :number
+  = f.input :name
+  = f.input :kind, as: :select, collection: Account::Kinds, include_blank: false
+  = f.button :submit

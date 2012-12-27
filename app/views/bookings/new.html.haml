@@ -1,0 +1,8 @@
+= simple_form_for(@booking) do |f|
+  = f.input :booking_date
+  = f.input :voucher_number
+  = f.input :from_account_id, as: :select, collection: @accounts
+  = f.input :to_account_id, as: :select, collection: @accounts
+  = f.input :text
+  = f.input :value_f, as: :float
+  = f.button :submit

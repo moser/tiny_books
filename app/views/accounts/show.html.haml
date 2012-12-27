@@ -1,0 +1,31 @@
+%h1= format_account(@account)
+%h2
+  = "#{Account.l(:balance)}:"
+  = format_currency(@account.balance_f)
+= link_to "Edit", edit_account_path(@account)
+%h2 Bookings
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th= Booking.l(:booking_date)
+      %th= Booking.l(:voucher_number)
+      %th= Booking.l(:from_account)
+      %th= Booking.l(:to_account)
+      %th= Booking.l(:value_from)
+      %th= Booking.l(:value_to)
+  %tbody
+    - @account.bookings.each do |booking| 
+      %tr.booking
+        %td= booking.booking_date
+        %td= booking.voucher_number
+        %td= format_account(booking.from_account) unless booking.from_account == @account
+        %td= format_account(booking.to_account) unless booking.to_account == @account
+        %td= format_currency(booking.value_f) unless booking.to_account == @account
+        %td= format_currency(booking.value_f) unless booking.from_account == @account
+    %tr
+      %td
+      %td
+      %td= Booking.l(:balance)
+      %td= format_currency(@account.balance_f)
+      %td= format_currency(@account.from_bookings.map(&:value_f).sum)
+      %td= format_currency(@account.to_bookings.map(&:value_f).sum)

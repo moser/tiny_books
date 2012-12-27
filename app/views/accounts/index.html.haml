@@ -1,0 +1,17 @@
+= link_to "New", new_account_path
+%table.table.table-striped
+  %thead
+    %th= Account.l(:number)
+    %th= Account.l(:name)
+    %th= Account.l(:kind)
+    %th
+      Actions
+  %tbody
+    - @accounts.each do |account|
+      %tr.account
+        %td= account.number
+        %td= account.name
+        %td= account.kind
+        %td
+          = link_to "Show", account_path(account)
+          = link_to "Edit", edit_account_path(account)
