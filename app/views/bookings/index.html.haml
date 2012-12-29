@@ -2,4 +2,4 @@
   = link_to "New", new_booking_path, class: "btn"
   = link_to "By account", index_by_account_bookings_path, class: "btn"
   = link_to "PDF", bookings_path(format: :pdf), class: "btn"
-= render partial: "index.html", locals: { bookings: @bookings }
+= render partial: "index", formats: [:html], locals: { bookings: @bookings }

@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
       f.html
       f.pdf do 
         render pdf: "journal",
-               template: "bookings/index.html.haml",
+               formats: [:html],
                disable_internal_links: true,
                disable_external_links: true,
                dpi: "90"
@@ -20,7 +20,7 @@ class BookingsController < ApplicationController
       f.html
       f.pdf do 
         render pdf: "account-sheets",
-               template: "bookings/index_by_account.html.haml",
+               formats: [:html],
                disable_internal_links: true,
                disable_external_links: true,
                dpi: "90"

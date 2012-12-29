@@ -7,6 +7,26 @@ describe "The bookings page" do
     status_code.should == 200
     all(:css, "tr.booking").length.should == 3
   end
+
+  it "renders a pdf" do
+    visit bookings_path(format: :pdf)
+    status_code.should == 200
+  end
+end
+
+
+describe "The bookings by account page" do
+  it "shows me all bookings" do
+    3.times { FG.create(:booking) }
+    visit index_by_account_bookings_path
+    status_code.should == 200
+    all(:css, "tr.booking").length.should == 6
+  end
+
+  it "renders a pdf" do
+    visit index_by_account_bookings_path(format: :pdf)
+    status_code.should == 200
+  end
 end
 
 describe "The new booking page" do

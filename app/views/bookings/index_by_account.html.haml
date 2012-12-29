@@ -5,4 +5,4 @@
   %h3
     = format_account(account)
     = format_currency(account.balance_f)
-  = render partial: "index.html", locals: { bookings: account.bookings }
+  = render partial: "index", formats: [:html], locals: { bookings: account.bookings }
