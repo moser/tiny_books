@@ -3,6 +3,9 @@ require 'spec_helper'
 describe Booking do
   it { should belong_to :from_account }
   it { should belong_to :to_account }
+  it { should belong_to :parent_booking }
+
+  it { should have_many :child_bookings }
 
   it { should validate_presence_of :booking_date } 
   it { should validate_presence_of :from_account } 
@@ -24,6 +27,12 @@ describe Booking do
       booking = Booking.new
       booking.value_f = 12.22
       booking.value.should == 1222
+    end
+
+    it "rounds correctly" do
+      booking = Booking.new
+      booking.value_f = 0.189999999
+      booking.value.should == 19
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224081327) do
+ActiveRecord::Schema.define(:version => 20121227174301) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "number"
@@ -27,9 +27,10 @@ ActiveRecord::Schema.define(:version => 20121224081327) do
     t.integer  "to_account_id"
     t.string   "text"
     t.integer  "value"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.string   "voucher_number",  :default => "", :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "voucher_number",    :default => "", :null => false
+    t.integer  "parent_booking_id"
   end
 
 end

@@ -13,6 +13,7 @@
       %th= Booking.l(:to_account)
       %th= Booking.l(:value_from)
       %th= Booking.l(:value_to)
+      %th Actions
   %tbody
     - @account.bookings.each do |booking| 
       %tr.booking
@@ -22,6 +23,9 @@
         %td= format_account(booking.to_account) unless booking.to_account == @account
         %td= format_currency(booking.value_f) unless booking.to_account == @account
         %td= format_currency(booking.value_f) unless booking.from_account == @account
+        %td
+          - bocking = booking.parent_booking if booking.parent_booking
+          = link_to "Show", booking
     %tr
       %td
       %td
@@ -29,3 +33,4 @@
       %td= format_currency(@account.balance_f)
       %td= format_currency(@account.from_bookings.map(&:value_f).sum)
       %td= format_currency(@account.to_bookings.map(&:value_f).sum)
+      %td

@@ -1,9 +1,12 @@
-= link_to BookingWithVat.l, new_booking_with_vat_path
+= link_to Booking.l, new_booking_path
 = simple_form_for(@booking) do |f|
   = f.input :booking_date, as: :string
   = f.input :voucher_number
   = f.input :from_account_id, as: :select, collection: @accounts
   = f.input :to_account_id, as: :select, collection: @accounts
   = f.input :text
-  = f.input :value_f, as: :float
+  = f.input :value_f
+  = f.input :vat_account_id, as: :select, collection: @accounts
+  = f.input :vat_on_input, as: :radio_buttons
+  = f.input :vat_percentage
   = f.button :submit

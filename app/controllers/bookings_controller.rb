@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   def index
     #TODO authorize
-    @bookings = Booking.all
+    @bookings = Booking.parents_only
   end
 
   def new
@@ -19,5 +19,11 @@ class BookingsController < ApplicationController
     else
       render action: :new
     end
+  end
+
+  def show
+    #TODO authorize
+    @booking = Booking.find(params[:id])
+    redirect_to @booking.parent_booking if @booking.parent_booking
   end
 end

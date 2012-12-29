@@ -7,6 +7,7 @@
       %th= Booking.l(:from_account)
       %th= Booking.l(:to_account)
       %th= Booking.l(:value)
+      %th Actions
   %tbody
     - @bookings.each do |booking| 
       %tr.booking
@@ -15,3 +16,12 @@
         %td= format_account(booking.from_account)
         %td= format_account(booking.to_account)
         %td= format_currency(booking.value_f)
+        %td= link_to "Show", booking
+      - booking.child_bookings.each do |child_booking|
+        %tr.booking.child
+          %td
+          %td
+          %td= format_account(child_booking.from_account)
+          %td= format_account(child_booking.to_account)
+          %td= format_currency(child_booking.value_f)
+          %td
