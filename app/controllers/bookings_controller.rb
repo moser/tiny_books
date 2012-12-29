@@ -2,6 +2,30 @@ class BookingsController < ApplicationController
   def index
     #TODO authorize
     @bookings = Booking.parents_only
+    respond_to do |f|
+      f.html
+      f.pdf do 
+        render pdf: "journal",
+               template: "bookings/index.html.haml",
+               disable_internal_links: true,
+               disable_external_links: true,
+               dpi: "90"
+      end
+    end
+  end
+
+  def index_by_account
+    @accounts = Account.all.select { |account| account.bookings.count > 0 }
+    respond_to do |f|
+      f.html
+      f.pdf do 
+        render pdf: "account-sheets",
+               template: "bookings/index_by_account.html.haml",
+               disable_internal_links: true,
+               disable_external_links: true,
+               dpi: "90"
+      end
+    end
   end
 
   def new

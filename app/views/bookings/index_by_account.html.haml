@@ -1,0 +1,8 @@
+.no-print
+  = link_to "By time", bookings_path, class: "btn"
+  = link_to "PDF", index_by_account_bookings_path(format: :pdf), class: "btn"
+- @accounts.each do |account|
+  %h3
+    = format_account(account)
+    = format_currency(account.balance_f)
+  = render partial: "index.html", locals: { bookings: account.bookings }
