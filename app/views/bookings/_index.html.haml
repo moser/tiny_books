@@ -17,7 +17,9 @@
         %td= format_account(booking.from_account)
         %td= format_account(booking.to_account)
         %td= format_currency(booking.value_f)
-        %td.no-print= link_to "Show", booking
+        %td.no-print
+          = link_to "Show", booking
+          = link_to "Revert", revert_booking_path(booking) unless booking.reverted_by_booking
       - booking.child_bookings.each do |child_booking|
         %tr.booking.child
           %td

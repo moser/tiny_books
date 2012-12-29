@@ -12,6 +12,14 @@ describe "The bookings page" do
     visit bookings_path(format: :pdf)
     status_code.should == 200
   end
+
+  it "lets me revert a booking" do
+    booking = FG.create(:booking)
+    visit bookings_path
+    click_link "Revert"
+    booking.from_account.balance.should == 0
+    booking.to_account.balance.should == 0
+  end
 end
 
 

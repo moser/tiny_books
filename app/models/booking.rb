@@ -6,8 +6,11 @@ class Booking < ActiveRecord::Base
   belongs_to :from_account, class_name: Account
   belongs_to :to_account, class_name: Account
   belongs_to :parent_booking, class_name: Booking
+  belongs_to :reverted_by_booking, class_name: Booking
 
   has_many :child_bookings, class_name: Booking, foreign_key: "parent_booking_id"
+
+  has_one :reverted_booking, class_name: Booking, foreign_key: "reverted_by_booking_id"
 
   validates_presence_of :booking_date
   validates_presence_of :from_account
@@ -35,5 +38,21 @@ class Booking < ActiveRecord::Base
   def initialize(*args)
     super(*args)
     self.booking_date = Date.today unless self.booking_date
+  end
+
+  def revert(parent_booking = nil)
+    unless reverted_by_booking
+      self.reverted_by_booking = Booking.create(booking_date: booking_date,
+                     voucher_number: voucher_number,
+                     from_account: to_account,
+                     to_account: from_account,
+                     text: "Storno: #{text}",
+                     value: value,
+                     parent_booking: parent_booking)
+      save
+      child_bookings.each do |child_booking|
+        child_booking.revert(reverted_by_booking)
+      end
+    end
   end
 end

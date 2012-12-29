@@ -50,4 +50,11 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     redirect_to @booking.parent_booking if @booking.parent_booking
   end
+
+  def revert
+    #TODO authorize
+    @booking = Booking.find(params[:id])
+    @booking.revert
+    redirect_to @booking
+  end
 end
