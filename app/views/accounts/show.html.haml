@@ -9,6 +9,7 @@
     %tr
       %th= Booking.l(:booking_date)
       %th= Booking.l(:voucher_number)
+      %th= Booking.l(:text)
       %th= Booking.l(:from_account)
       %th= Booking.l(:to_account)
       %th= Booking.l(:value_from)
@@ -19,6 +20,7 @@
       %tr.booking
         %td= booking.booking_date
         %td= booking.voucher_number
+        %td= booking.text
         %td= format_account(booking.from_account) unless booking.from_account == @account
         %td= format_account(booking.to_account) unless booking.to_account == @account
         %td= format_currency(booking.value_f) unless booking.to_account == @account
@@ -27,6 +29,7 @@
           - bocking = booking.parent_booking if booking.parent_booking
           = link_to "Show", booking
     %tr
+      %td
       %td
       %td
       %td= Booking.l(:balance)

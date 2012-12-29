@@ -3,6 +3,7 @@
     %tr
       %th= Booking.l(:booking_date)
       %th= Booking.l(:voucher_number)
+      %th= Booking.l(:text)
       %th= Booking.l(:from_account)
       %th= Booking.l(:to_account)
       %th= Booking.l(:value)
@@ -10,11 +11,13 @@
     %tr.booking
       %td= @booking.booking_date
       %td= @booking.voucher_number
+      %td= @booking.text
       %td= format_account(@booking.from_account)
       %td= format_account(@booking.to_account)
       %td= format_currency(@booking.value_f)
     - @booking.child_bookings.each do |child_booking|
       %tr.booking.child
+        %td
         %td
         %td
         %td= format_account(child_booking.from_account)
