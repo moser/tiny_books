@@ -2,7 +2,6 @@
 %h2
   = "#{Account.l(:balance)}:"
   = format_currency(@account.balance_f)
-= link_to "Edit", edit_account_path(@account)
 %h2 Bookings
 %table.table.table-striped.table-hover
   %thead
@@ -14,7 +13,7 @@
       %th= Booking.l(:to_account)
       %th= Booking.l(:value_from)
       %th= Booking.l(:value_to)
-      %th Actions
+      %th
   %tbody
     - @account.bookings.each do |booking| 
       %tr.booking
@@ -32,7 +31,7 @@
       %td
       %td
       %td
-      %td= Booking.l(:balance)
+      %td= Account.l(:balance)
       %td= format_currency(@account.balance_f)
       %td= format_currency(@account.from_bookings.map(&:value_f).sum)
       %td= format_currency(@account.to_bookings.map(&:value_f).sum)
