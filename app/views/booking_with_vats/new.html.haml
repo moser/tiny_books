@@ -1,6 +1,6 @@
 = link_to Booking.l, new_booking_path
 = simple_form_for(@booking) do |f|
-  = f.input :booking_date, as: :string
+  = f.input :booking_date, as: :string, input_html: { class: "datepicker" }
   = f.input :voucher_number
   = f.input :from_account_id, as: :select, collection: @accounts
   = f.input :to_account_id, as: :select, collection: @accounts

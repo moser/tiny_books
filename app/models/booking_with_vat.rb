@@ -22,9 +22,9 @@ class BookingWithVat
     @parent_booking = Booking.new
     @child_booking = Booking.new
     @booking_date = Date.today
-    @vat_percantage = 0.19
+    @vat_percentage = 0.19
     @vat_on_input = true
-    @vat_account = Account.where(name: "USt").first
+    @vat_account_id = Account.where(name: "VSt").first.try(:id)
     @value_f = 0.0
     Attrs.each do |attr|
       self.send("#{attr}=", attrs[attr]) if attrs.has_key?(attr)
