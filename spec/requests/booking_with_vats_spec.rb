@@ -5,6 +5,7 @@ describe "The new booking with VAT page" do
     FG.create(:account, number: 1000, name: "Bank")
     FG.create(:account, number: 4000, name: "Aufwandskonto")
     FG.create(:account, number: 5000, name: "VSt")
+    FG.create(:business_year)
   end
 
   it "makes enter all the data" do

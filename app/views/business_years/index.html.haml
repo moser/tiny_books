@@ -1,0 +1,16 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th= BusinessYear.l(:year)
+      %th= BusinessYear.l(:business_year_closed_to_this)
+      %th= BusinessYear.l(:closed_on)
+      %th= BusinessYear.l(:closed_to_business_year)
+      %th
+  %tbody
+    - @business_years.each do |business_year|
+      %tr.business_year
+        %td= business_year.year
+        %td= link_to business_year.business_year_closed_to_this.year, business_year.business_year_closed_to_this if business_year.business_year_closed_to_this
+        %td= I18n.l(business_year.closed_on, format: :short) if business_year.closed_on
+        %td= link_to business_year.closed_to_business_year.year, business_year.closed_to_business_year if business_year.closed_to_business_year
+        %td

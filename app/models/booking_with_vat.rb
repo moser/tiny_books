@@ -4,11 +4,12 @@ class BookingWithVat
 
   Attrs = [ :vat_percentage, :vat_on_input, 
             :from_account_id, :to_account_id, :vat_account_id, :value_f, :text,
-            :booking_date, :voucher_number ]
+            :booking_date, :voucher_number, :business_year_id ]
 
   attr_accessor :parent_booking, :child_booking
   attr_accessor *Attrs
 
+  validates_presence_of :business_year_id
   validates_presence_of :booking_date
   validates_presence_of :from_account_id
   validates_presence_of :to_account_id
@@ -68,10 +69,10 @@ class BookingWithVat
         child_to_account_id = @to_account_id
         child_from_account_id = @vat_account_id
       end
-      @parent_booking = Booking.create(booking_date: @booking_date, from_account_id: @from_account_id,
+      @parent_booking = Booking.create(business_year_id: @business_year_id, booking_date: @booking_date, from_account_id: @from_account_id,
                                        to_account_id: @to_account_id, text: @text, value_f: value,
                                        voucher_number: @voucher_number)
-      @child_booking = Booking.create(booking_date: @booking_date, from_account_id: child_from_account_id,
+      @child_booking = Booking.create(business_year_id: @business_year_id, booking_date: @booking_date, from_account_id: child_from_account_id,
                                        to_account_id: child_to_account_id, text: @text, value_f: vat,
                                        voucher_number: @voucher_number, parent_booking: @parent_booking)
     else

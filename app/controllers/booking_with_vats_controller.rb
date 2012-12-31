@@ -2,6 +2,7 @@ class BookingWithVatsController < ApplicationController
   def new
     @booking = BookingWithVat.new
     @accounts = Account.all
+    @business_years = BusinessYear.where(closed_on: nil)
   end
 
   def create
@@ -10,6 +11,7 @@ class BookingWithVatsController < ApplicationController
       redirect_to @booking.parent_booking
     else
       @accounts = Account.all
+      @business_years = BusinessYear.where(closed_on: nil)
       render action: :new
     end
   end

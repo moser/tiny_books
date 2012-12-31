@@ -14,6 +14,7 @@ FactoryGirl.define do
     text "foo"
     value 100
     voucher_number "12-1000"
+    business_year { BusinessYear.first || FG.create(:business_year) }
   end
 
   factory :booking_with_vat do
@@ -26,5 +27,10 @@ FactoryGirl.define do
     vat_account_id { FG.create(:account).id }
     vat_percentage 0.19
     vat_on_input true
+    business_year_id { (BusinessYear.open.first || FG.create(:business_year)).id }
+  end
+
+  factory :business_year do
+    year "2012"
   end
 end

@@ -5,11 +5,13 @@ describe Booking do
   it { should belong_to :to_account }
   it { should belong_to :parent_booking }
   it { should belong_to :reverted_by_booking }
+  it { should belong_to :business_year }
 
   it { should have_many :child_bookings }
 
   it { should have_one :reverted_booking }
 
+  it { should validate_presence_of :business_year } 
   it { should validate_presence_of :booking_date } 
   it { should validate_presence_of :from_account } 
   it { should validate_presence_of :to_account } 

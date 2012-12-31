@@ -41,6 +41,7 @@ describe "The new booking page" do
   before do
     FG.create(:account, number: 1000, name: "Bank")
     FG.create(:account, number: 4001, name: "Aufwandskonto")
+    FG.create(:business_year)
   end
 
   it "makes enter all the data" do

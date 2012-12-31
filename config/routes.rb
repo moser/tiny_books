@@ -5,4 +5,7 @@ TinyBooks::Application.routes.draw do
   end
   resources :booking_with_vats
   resources :accounts
+  resources :business_years do
+    resources :bookings
+  end
 end

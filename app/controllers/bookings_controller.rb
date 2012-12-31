@@ -32,6 +32,7 @@ class BookingsController < ApplicationController
     #TODO authorize
     @booking = Booking.new
     @accounts = Account.all
+    @business_years = BusinessYear.where(closed_on: nil)
   end
 
 
@@ -41,6 +42,8 @@ class BookingsController < ApplicationController
     if @booking.valid?
       redirect_to new_booking_path
     else
+      @accounts = Account.all
+      @business_years = BusinessYear.where(closed_on: nil)
       render action: :new
     end
   end

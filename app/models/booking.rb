@@ -1,17 +1,19 @@
 class Booking < ActiveRecord::Base
   attr_accessible :booking_date, :from_account, :to_account, :text, :value,
                   :from_account_id, :to_account_id, :value_f, :voucher_number,
-                  :parent_booking
+                  :parent_booking, :business_year, :business_year_id
 
   belongs_to :from_account, class_name: Account
   belongs_to :to_account, class_name: Account
   belongs_to :parent_booking, class_name: Booking
   belongs_to :reverted_by_booking, class_name: Booking
+  belongs_to :business_year
 
   has_many :child_bookings, class_name: Booking, foreign_key: "parent_booking_id"
 
   has_one :reverted_booking, class_name: Booking, foreign_key: "reverted_by_booking_id"
 
+  validates_presence_of :business_year
   validates_presence_of :booking_date
   validates_presence_of :from_account
   validates_presence_of :to_account
@@ -42,13 +44,14 @@ class Booking < ActiveRecord::Base
 
   def revert(parent_booking = nil)
     unless reverted_by_booking
-      self.reverted_by_booking = Booking.create(booking_date: booking_date,
-                     voucher_number: voucher_number,
-                     from_account: to_account,
-                     to_account: from_account,
-                     text: "Storno: #{text}",
-                     value: value,
-                     parent_booking: parent_booking)
+      self.reverted_by_booking = Booking.create(business_year: business_year,
+                                           booking_date: booking_date,
+                                           voucher_number: voucher_number,
+                                           from_account: to_account,
+                                           to_account: from_account,
+                                           text: "Storno: #{text}",
+                                           value: value,
+                                           parent_booking: parent_booking)
       save
       child_bookings.each do |child_booking|
         child_booking.revert(reverted_by_booking)

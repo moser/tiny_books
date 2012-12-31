@@ -14,6 +14,7 @@ describe BookingWithVat do
     end
   end
 
+  it { should validate_presence_of :business_year_id }
   it { should validate_presence_of :booking_date } 
   it { should validate_presence_of :from_account_id } 
   it { should validate_presence_of :to_account_id } 
