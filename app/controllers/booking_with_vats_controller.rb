@@ -3,6 +3,7 @@ class BookingWithVatsController < ApplicationController
     @booking = BookingWithVat.new
     @accounts = Account.all
     @business_years = BusinessYear.where(closed_on: nil)
+    @bookings = Booking.parents_only.order("created_at DESC")
   end
 
   def create

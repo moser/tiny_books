@@ -16,4 +16,8 @@ class BusinessYear < ActiveRecord::Base
     self.closed_to_business_year = new_year
     save
   end
+
+  def to_s
+    year.to_s
+  end
 end

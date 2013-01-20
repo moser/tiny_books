@@ -1,4 +1,4 @@
-= link_to Booking.l, new_booking_path
+= link_to Booking.l, new_booking_path, class: 'btn'
 = simple_form_for(@booking) do |f|
   = f.input :business_year_id, as: :select, collection: @business_years, include_blank: false
   = f.input :booking_date, as: :string, input_html: { class: "datepicker" }
@@ -11,3 +11,4 @@
   = f.input :vat_on_input, as: :radio_buttons
   = f.input :vat_percentage
   = f.button :submit
+= render partial: "bookings/index", formats: [:html], locals: { bookings: @bookings }
