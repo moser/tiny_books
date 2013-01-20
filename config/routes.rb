@@ -8,4 +8,6 @@ TinyBooks::Application.routes.draw do
   resources :business_years do
     resources :bookings
   end
+
+  match '/', to: 'bookings#index'
 end
