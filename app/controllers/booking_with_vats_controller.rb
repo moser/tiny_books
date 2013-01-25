@@ -13,6 +13,7 @@ class BookingWithVatsController < ApplicationController
     else
       @accounts = Account.all
       @business_years = BusinessYear.where(closed_on: nil)
+      @bookings = Booking.parents_only.order("created_at DESC")
       render action: :new
     end
   end
