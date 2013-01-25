@@ -22,6 +22,20 @@ describe "The bookings page" do
   end
 end
 
+describe "The import feature" do
+  it "lets me import a csv file" do
+    visit bookings_path
+    FG.create(:business_year)
+    FG.create(:account, number: 1)
+    FG.create(:account, number: 2)
+    attach_file("file", "#{Rails.root}/spec/import.csv")
+    click_button "Import"
+    status_code.should == 200
+    page.should have_text("Import: OK")
+    Booking.count.should == 3
+  end
+end
+
 
 describe "The bookings by account page" do
   it "shows me all bookings" do

@@ -62,4 +62,13 @@ class BookingsController < ApplicationController
     @booking.revert
     redirect_to @booking
   end
+
+  def import
+    if params[:file]
+      Booking.import(params[:file])
+      redirect_to bookings_path, notice: "Import: OK"
+    else
+      redirect_to bookings_path
+    end
+  end
 end

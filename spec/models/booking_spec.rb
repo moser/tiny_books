@@ -91,4 +91,17 @@ describe Booking do
       Booking.last_voucher_number.should == "4"
     end
   end
+
+  describe ".import" do
+    it "creates a booking for each line in the CSV" do
+      FG.create(:business_year)
+      FG.create(:account, number: 1)
+      FG.create(:account, number: 2)
+      Booking.import(File.new("#{Rails.root}/spec/import.csv"))
+      Booking.count.should == 3
+      Account.where(number: 2).first.balance_f.should == 9.95
+    end
+  end
+
+  xit "warns when a duplicate of a booking is created"
 end

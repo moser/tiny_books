@@ -1,0 +1,4 @@
+booking_date,voucher_number,from_account_number,to_account_number,text,value_f
+2012-10-01,234,1,2,Some text,22.3
+2012-10-02,1232,2,1,Some text,0.35
+2012-10-03,222,2,1,Some text,12

@@ -1,7 +1,10 @@
+require 'csv'
+
 class Booking < ActiveRecord::Base
   attr_accessible :booking_date, :from_account, :to_account, :text, :value,
                   :from_account_id, :to_account_id, :value_f, :voucher_number,
-                  :parent_booking, :business_year, :business_year_id
+                  :parent_booking, :business_year, :business_year_id,
+                  :from_account_number, :to_account_number
 
   belongs_to :from_account, class_name: Account
   belongs_to :to_account, class_name: Account
@@ -37,6 +40,22 @@ class Booking < ActiveRecord::Base
     self.value = i
   end
 
+  def from_account_number
+    from_account.try(:number)
+  end
+
+  def to_account_number
+    to_account.try(:number)
+  end
+
+  def from_account_number=(n)
+    self.from_account = Account.where(number: n).first
+  end
+
+  def to_account_number=(n)
+    self.to_account = Account.where(number: n).first
+  end
+
   def initialize(*args)
     super(*args)
     self.booking_date = Date.today unless self.booking_date
@@ -67,5 +86,11 @@ class Booking < ActiveRecord::Base
 
   def self.last_voucher_number
     Booking.select(:voucher_number).map(&:voucher_number).sort.last || ""
+  end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      Booking.create! row.to_hash.merge(business_year_id: BusinessYear.open.first.try(:id))
+    end
   end
 end
