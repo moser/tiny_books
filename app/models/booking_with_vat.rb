@@ -20,6 +20,7 @@ class BookingWithVat
   validates_presence_of :vat_percentage
 
   def initialize(attrs = {})
+    @voucher_number = Booking.last_voucher_number
     @parent_booking = Booking.new
     @child_booking = Booking.new
     @booking_date = Date.today

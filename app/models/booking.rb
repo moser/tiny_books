@@ -58,4 +58,14 @@ class Booking < ActiveRecord::Base
       end
     end
   end
+
+  def initialize(*args)
+    super(*args)
+    self.voucher_number = Booking.last_voucher_number if !voucher_number || voucher_number.blank?
+    self.booking_date ||= Date.today
+  end
+
+  def self.last_voucher_number
+    Booking.select(:voucher_number).map(&:voucher_number).sort.last || ""
+  end
 end

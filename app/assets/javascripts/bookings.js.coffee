@@ -4,3 +4,6 @@
 
 $ ->
   $(".datepicker").datepicker({ dateFormat: "yy-mm-dd" })
+  $(".increase_voucher_number").click (e) ->
+    target = $(e.target).siblings('input.voucher_number')
+    target.val(parseInt(target.val()) + 1)

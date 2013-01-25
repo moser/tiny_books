@@ -82,4 +82,13 @@ describe Booking do
       Booking.count.should == 2
     end
   end
+
+  describe ".last_voucher_number" do
+    it "returns the maximum of the voucher number" do
+      Booking.last_voucher_number.should == ""
+      FG.create(:booking, voucher_number: "3")
+      FG.create(:booking, voucher_number: "4")
+      Booking.last_voucher_number.should == "4"
+    end
+  end
 end
