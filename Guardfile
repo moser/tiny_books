@@ -1,3 +1,5 @@
+notification :libnotify, :timeout => 3, :transient => true, :urgency => :low
+
 guard 'livereload' do
   watch(%r{app/.+\.(erb|haml)})
   watch(%r{app/helpers/.+\.rb})

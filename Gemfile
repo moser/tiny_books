@@ -31,6 +31,7 @@ end
 group :development, :test do
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-rspec'
+  gem 'libnotify'
   gem 'guard-livereload'
   gem "rspec-rails"
   gem "better_errors"
@@ -40,6 +41,7 @@ end
 group :test do
   gem "shoulda-matchers"
   gem "capybara"
+  gem 'capybara-screenshot'
   gem "launchy"
   gem "factory_girl"
   gem "simplecov", :require => false
