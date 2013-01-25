@@ -1,4 +1,7 @@
 TinyBooks::Application.routes.draw do
+  resources :booking_templates
+
+
   resources :bookings do
     get :index_by_account, on: :collection
     get :revert, on: :member

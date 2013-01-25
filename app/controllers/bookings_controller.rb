@@ -34,6 +34,7 @@ class BookingsController < ApplicationController
     @accounts = Account.all
     @business_years = BusinessYear.where(closed_on: nil)
     @bookings = Booking.parents_only.order("created_at DESC")
+    @booking_templates = BookingTemplate.all
   end
 
 
@@ -46,6 +47,7 @@ class BookingsController < ApplicationController
       @accounts = Account.all
       @business_years = BusinessYear.where(closed_on: nil)
       @bookings = Booking.parents_only.order("created_at DESC")
+      @booking_templates = BookingTemplate.all
       render action: :new
     end
   end

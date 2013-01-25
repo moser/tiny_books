@@ -1,0 +1,6 @@
+= simple_form_for(@booking_template) do |f|
+  = f.error_notification
+  = f.input :name
+  = f.input :booking_type
+  = f.input :json, as: :text
+  = f.button :submit
