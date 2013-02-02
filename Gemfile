@@ -8,8 +8,11 @@ gem "haml-rails"
 gem "simple_form"
 gem "devise"
 gem "responders"
-gem "cancan"
 gem "wicked_pdf"
+
+group :production do
+  gem 'pg'
+end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

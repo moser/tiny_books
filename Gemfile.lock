@@ -47,7 +47,6 @@ GEM
     bourne (1.1.2)
       mocha (= 0.10.5)
     builder (3.0.4)
-    cancan (1.6.8)
     capybara (2.0.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -144,6 +143,7 @@ GEM
     multi_json (1.5.0)
     nokogiri (1.5.6)
     orm_adapter (0.4.0)
+    pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -250,7 +250,6 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
-  cancan
   capybara
   capybara-screenshot
   coffee-rails (~> 3.2.1)
@@ -266,6 +265,7 @@ DEPENDENCIES
   launchy
   less-rails
   libnotify
+  pg
   rails (= 3.2.9)
   responders
   rspec-rails
