@@ -1,4 +1,6 @@
 TinyBooks::Application.routes.draw do
+  devise_for :users
+
   resources :booking_templates
 
 

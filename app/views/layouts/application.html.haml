@@ -8,15 +8,18 @@
     = stylesheet_link_tag 'application', :media => "all"
     = javascript_include_tag 'application'
   %body
-    .navbar-fixed-top
-      .navbar.navbar-inner
-        .container
-          %a.brand
-            TinyBooks
-          %ul.nav
-            %li= link_to "Bookings", bookings_path 
-            %li= link_to "Accounts", accounts_path 
-            %li= link_to "Business years", business_years_path 
+    - if user_signed_in?
+      .navbar-fixed-top
+        .navbar.navbar-inner
+          .container
+            %a.brand
+              TinyBooks
+            %ul.nav
+              %li= link_to "Bookings", bookings_path 
+              %li= link_to "Accounts", accounts_path 
+              %li= link_to "Business years", business_years_path 
+            .pull-right
+              = link_to "Abmelden", destroy_user_session_path, class: "btn btn-small", method: :delete
 
     .container
       .row

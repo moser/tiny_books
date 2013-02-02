@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
-    #TODO authorize
     @bookings = Booking.parents_only
     respond_to do |f|
       f.html
@@ -29,7 +30,6 @@ class BookingsController < ApplicationController
   end
 
   def new
-    #TODO authorize
     @booking = Booking.new
     @accounts = Account.all
     @business_years = BusinessYear.where(closed_on: nil)
@@ -39,7 +39,6 @@ class BookingsController < ApplicationController
 
 
   def create
-    #TODO authorize
     @booking = Booking.create(params[:booking])
     if @booking.valid?
       redirect_to new_booking_path
@@ -53,13 +52,11 @@ class BookingsController < ApplicationController
   end
 
   def show
-    #TODO authorize
     @booking = Booking.find(params[:id])
     redirect_to @booking.parent_booking if @booking.parent_booking
   end
 
   def revert
-    #TODO authorize
     @booking = Booking.find(params[:id])
     @booking.revert
     redirect_to @booking

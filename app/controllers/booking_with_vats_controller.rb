@@ -1,4 +1,6 @@
 class BookingWithVatsController < ApplicationController
+  before_filter :authenticate_user!
+
   def new
     @booking = BookingWithVat.new
     @accounts = Account.all

@@ -49,6 +49,7 @@ Spork.prefork do
     config.include Capybara::DSL, :type => :request    
     
     config.include Devise::TestHelpers, :type => :controller
+    config.include Warden::Test::Helpers, type: :request
 
     config.before(:suite) do
       DatabaseCleaner.strategy = :truncation
@@ -60,6 +61,15 @@ Spork.prefork do
 
     config.after(:each) do
       DatabaseCleaner.clean
+    end
+
+    config.before(:all, type: :request) do
+      Warden.test_mode!
+    end
+
+    config.before(:each, type: :request) do
+      @user = FG.create(:user)
+      login_as(@user, :scope => :user)
     end
   end
 end

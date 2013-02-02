@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
-    # TODO authorize
     @accounts = Account.all
   end
 
@@ -9,12 +10,10 @@ class AccountsController < ApplicationController
   end
 
   def new
-    # TODO authorize
     @account = Account.new
   end
 
   def create
-    # TODO authorize
     @account = Account.create(params[:account])
     if @account.valid?
       redirect_to accounts_path

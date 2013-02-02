@@ -1,5 +1,6 @@
 class BookingTemplatesController < ApplicationController
   respond_to :html
+  before_filter :authenticate_user!
 
   def index
     @booking_templates = BookingTemplate.all

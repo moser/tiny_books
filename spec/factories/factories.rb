@@ -7,6 +7,12 @@ FactoryGirl.define do
     kind "active"
   end
 
+  factory :user do
+    sequence(:email) { |n| "user#{n}@example.com" }
+    password "foo12345"
+    password_confirmation "foo12345"
+  end
+
   factory :booking do
     booking_date { Date.today }
     association :from_account, factory: :account
