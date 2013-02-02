@@ -11,4 +11,4 @@ $ ->
     target = $(e.target)
     data = JSON.parse(target.attr("data-json"))
     _.each _.keys(data), (key) ->
-      $("#booking_#{key}").val(data[key])
+      $("#booking_#{key}").val(data[key]).effect 'highlight', { duration: 2000 }
