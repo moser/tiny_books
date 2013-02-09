@@ -11,7 +11,6 @@ def import(file)
     else
       unmatched << line
       account = Account.create!(Hash[line.select { |k,_| %(number name kind).include?(k) }])
-      account.update_attribute :member_account, true
     end
   end
   unmatched

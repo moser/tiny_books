@@ -35,6 +35,7 @@ class Booking < ActiveRecord::Base
   end
 
   def value_f=(f)
+    f = f.gsub(",", "." if String === f
     f = f.to_f unless Float === f
     i = (f * 100).round(0)
     self.value = i
