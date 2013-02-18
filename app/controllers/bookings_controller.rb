@@ -33,7 +33,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     @accounts = Account.all
     @business_years = BusinessYear.where(closed_on: nil)
-    @bookings = Booking.parents_only.order("created_at DESC")
+    @bookings = Booking.parents_only.reorder("created_at DESC")
     @booking_templates = BookingTemplate.all
   end
 
@@ -45,7 +45,7 @@ class BookingsController < ApplicationController
     else
       @accounts = Account.all
       @business_years = BusinessYear.where(closed_on: nil)
-      @bookings = Booking.parents_only.order("created_at DESC")
+      @bookings = Booking.parents_only.reorder("created_at DESC")
       @booking_templates = BookingTemplate.all
       render action: :new
     end
