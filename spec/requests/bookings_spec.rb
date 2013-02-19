@@ -68,8 +68,8 @@ describe "The new booking page" do
     visit bookings_path
     click_link "New"
     fill_in "Voucher number", with: "10"
-    select "Bank", from: "From account"
-    select "Aufwandskonto", from: "To account"
+    select "1000 Bank", from: "From account"
+    select "4001 Aufwandskonto", from: "To account"
     fill_in "Text", with: "Foo"
     fill_in "Value", with: "100.22"
     click_button "Create Booking"

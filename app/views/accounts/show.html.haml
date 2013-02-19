@@ -32,7 +32,8 @@
       %td
       %td
       %td= Account.l(:balance)
-      %td= format_currency(@account.balance_f)
+      %td
+        %b= format_currency(@account.balance_f)
       %td= format_currency(@account.from_bookings.map(&:value_f).sum)
       %td= format_currency(@account.to_bookings.map(&:value_f).sum)
       %td

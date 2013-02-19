@@ -53,6 +53,9 @@ class Account < ActiveRecord::Base
     end
   end
 
+  def to_s
+    "#{number} #{name}"
+  end
 
   def self.opening_account
     Account.where(name: "Opening").first || Account.create(name: "Opening", kind: "expense", number: "999999")
