@@ -1,19 +1,32 @@
-= link_to Booking.l, new_booking_path, class: 'btn'
-= simple_form_for(@booking) do |f|
-  = f.input :business_year_id, as: :select, collection: @business_years, include_blank: false
-  = f.input :booking_date, as: :string, input_html: { class: "datepicker" }
-  .control-group.string.required
-    = f.label :voucher_number
-    .controls
-      .input-append
-        = f.input_field :voucher_number, class: 'voucher_number'
-        %a.btn.increase_voucher_number +
-  = f.input :from_account_id, as: :select, collection: @accounts, include_blank: false
-  = f.input :to_account_id, as: :select, collection: @accounts, include_blank: false
-  = f.input :text
-  = f.input :value_f, as: :float
-  = f.input :vat_account_id, as: :select, collection: @accounts, include_blank: false
-  = f.input :vat_on_input, as: :boolean
-  = f.input :vat_percentage, as: :float
-  = f.button :submit
-= render partial: "bookings/index", formats: [:html], locals: { bookings: @bookings }
+.row
+  .hidden
+    - @accounts.each do |account|
+      %span{ id: "account-by-number-#{account.number}", "data-id" => account.id }
+  .span6
+    = link_to Booking.l, new_booking_path, class: 'btn'
+    = simple_form_for(@booking) do |f|
+      = f.input :business_year_id, as: :select, collection: @business_years, include_blank: false
+      = f.input :booking_date, as: :string, input_html: { class: "datepicker" }
+      .control-group.string.required
+        = f.label :voucher_number
+        .controls
+          .input-append
+            = f.input_field :voucher_number, class: 'voucher_number'
+            %a.btn.increase_voucher_number +
+      = f.input :from_account_id, as: :select, collection: @accounts, include_blank: false
+      = f.input :to_account_id, as: :select, collection: @accounts, include_blank: false
+      = f.input :text
+      = f.input :value_f, as: :float
+      = f.input :vat_account_id, as: :select, collection: @accounts, include_blank: false
+      = f.input :vat_on_input, as: :boolean
+      = f.input :vat_percentage, as: :float
+      = f.button :submit
+  .span6
+    %table.table.table-striped
+      %tbody
+        - @booking_templates.each do |template|
+          %tr
+            %td
+              %a.template{ :id => "template-#{template.id}", :"data-json" => template.json }= template.name
+  .span12
+    = render partial: "bookings/index", formats: [:html], locals: { bookings: @bookings }

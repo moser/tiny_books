@@ -11,4 +11,9 @@ $ ->
     target = $(e.target)
     data = JSON.parse(target.attr("data-json"))
     _.each _.keys(data), (key) ->
-      $("#booking_#{key}").val(data[key]).effect 'highlight', { duration: 2000 }
+      value = data[key]
+      if key.match(/(from|vat|to)_account_number/)
+        key = key.replace("number", "id")
+        value = $("#account-by-number-#{value}").attr("data-id")
+      $("#booking_#{key}").val(value).effect 'highlight', { duration: 2000 }
+      $("#booking_with_vat_#{key}").val(value).effect 'highlight', { duration: 2000 }

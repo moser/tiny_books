@@ -1,16 +1,16 @@
 %h1 Listing booking_templates
 
-%table
+%table.table.table-striped
   %tr
-    %th
-    %th
+    %th Name
     %th
 
   - @booking_templates.each do |booking_template|
     %tr
-      %td= link_to 'Show', booking_template
-      %td= link_to 'Edit', edit_booking_template_path(booking_template)
-      %td= link_to 'Destroy', booking_template, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= booking_template.name
+      %td
+        = link_to 'Edit', edit_booking_template_path(booking_template)
+        = link_to 'Destroy', booking_template, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 

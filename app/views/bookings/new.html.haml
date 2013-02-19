@@ -1,4 +1,7 @@
 .row
+  .hidden
+    - @accounts.each do |account|
+      %span{ id: "account-by-number-#{account.number}", "data-id" => account.id }
   .span6
     = link_to BookingWithVat.l, new_booking_with_vat_path, class: 'btn'
     = simple_form_for(@booking) do |f|
