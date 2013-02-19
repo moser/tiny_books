@@ -5,7 +5,7 @@ class BookingWithVatsController < ApplicationController
     @booking = BookingWithVat.new
     @accounts = Account.all
     @business_years = BusinessYear.where(closed_on: nil)
-    @bookings = Booking.parents_only.order("created_at DESC")
+    @bookings = Booking.parents_only.reorder("created_at DESC")
   end
 
   def create
@@ -15,7 +15,7 @@ class BookingWithVatsController < ApplicationController
     else
       @accounts = Account.all
       @business_years = BusinessYear.where(closed_on: nil)
-      @bookings = Booking.parents_only.order("created_at DESC")
+      @bookings = Booking.parents_only.reorder("created_at DESC")
       render action: :new
     end
   end

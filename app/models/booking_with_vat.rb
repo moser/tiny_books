@@ -50,20 +50,27 @@ class BookingWithVat
   end
   
   def vat_percentage=(f)
+    f = f.gsub(",", ".") if String === f
     f = f.to_f if f && f.respond_to?(:to_f)
     @vat_percentage = f
   end
   
   def value_f=(f)
+    f = f.gsub(",", ".") if String === f
     f = f.to_f if f && f.respond_to?(:to_f)
     @value_f = f
+  end
+
+  def vat_on_input=(b)
+    b = b != "0" if String === b
+    @vat_on_input = b
   end
 
   def save
     if valid?
       value = @value_f / (1.0 + @vat_percentage)
       vat = @value_f - value
-      unless @vat_on_input
+      if !@vat_on_input
         child_to_account_id = @vat_account_id
         child_from_account_id = @from_account_id
       else

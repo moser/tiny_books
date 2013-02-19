@@ -70,6 +70,19 @@ describe BookingWithVat do
     end
   end
 
+  describe "#vat_on_input" do
+    it "converts values to boolean" do
+      booking = FG.build(:booking_with_vat)
+      booking.vat_on_input = "0"
+      booking.vat_on_input.should be_false
+      booking.vat_on_input = "1"
+      booking.vat_on_input.should be_true
+      booking.vat_on_input = false
+      booking.vat_on_input.should be_false
+      booking.vat_on_input = true
+      booking.vat_on_input.should be_true
+    end
+  end
 
   describe "#vat_percentage" do
     it "converts values to float" do

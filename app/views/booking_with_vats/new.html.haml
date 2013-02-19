@@ -11,9 +11,9 @@
   = f.input :from_account_id, as: :select, collection: @accounts, include_blank: false
   = f.input :to_account_id, as: :select, collection: @accounts, include_blank: false
   = f.input :text
-  = f.input :value_f
+  = f.input :value_f, as: :float
   = f.input :vat_account_id, as: :select, collection: @accounts, include_blank: false
-  = f.input :vat_on_input, as: :radio_buttons
-  = f.input :vat_percentage
+  = f.input :vat_on_input, as: :boolean
+  = f.input :vat_percentage, as: :float
   = f.button :submit
 = render partial: "bookings/index", formats: [:html], locals: { bookings: @bookings }
