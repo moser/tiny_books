@@ -26,7 +26,7 @@ class BookingWithVat
     @booking_date = Date.today
     @vat_percentage = 0.19
     @vat_on_input = true
-    @vat_account_id = Account.where(name: "VSt").first.try(:id)
+    @vat_account_id = Account.where("name LIKE '%Vorsteuer%'").first.try(:id)
     @value_f = 0.0
     Attrs.each do |attr|
       self.send("#{attr}=", attrs[attr]) if attrs.has_key?(attr)

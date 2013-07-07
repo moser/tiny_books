@@ -14,6 +14,8 @@ class Account < ActiveRecord::Base
 
   validates_inclusion_of :kind, in: Kinds 
 
+  default_scope order('number ASC')
+
   def balance(year = nil)
     to_bookings(year).map(&:value).sum - from_bookings(year).map(&:value).sum    
   end
