@@ -2,7 +2,8 @@ class BookingWithVatsController < ApplicationController
   before_filter :authenticate_user!
 
   def new
-    @booking = BookingWithVat.new
+    new_booking_date = Booking.reorder(:created_at).last.try(:booking_date) || Date.today
+    @booking = BookingWithVat.new(booking_date: new_booking_date)
     @accounts = Account.all
     @business_years = BusinessYear.where(closed_on: nil)
     @bookings = Booking.parents_only.reorder("created_at DESC")
