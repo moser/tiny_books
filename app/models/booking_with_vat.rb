@@ -4,7 +4,8 @@ class BookingWithVat
 
   Attrs = [ :vat_percentage, :vat_on_input, 
             :from_account_id, :to_account_id, :vat_account_id, :value_f, :text,
-            :booking_date, :voucher_number, :business_year_id ]
+            :booking_date, :voucher_number, :business_year_id, :from_account_number,
+            :to_account_number, :vat_account_number ]
 
   attr_accessor :parent_booking, :child_booking
   attr_accessor *Attrs
@@ -28,6 +29,7 @@ class BookingWithVat
     @vat_on_input = true
     @vat_account_id = Account.where("name LIKE '%Vorsteuer%'").first.try(:id)
     @value_f = 0.0
+    attrs = attrs.with_indifferent_access
     Attrs.each do |attr|
       self.send("#{attr}=", attrs[attr]) if attrs.has_key?(attr)
     end
@@ -66,6 +68,18 @@ class BookingWithVat
     @vat_on_input = b
   end
 
+  def from_account_number=(n)
+    self.from_account_id = Account.where(number: n).first.id
+  end
+
+  def to_account_number=(n)
+    self.to_account_id = Account.where(number: n).first.id
+  end
+
+  def vat_account_number=(n)
+    self.vat_account_id = Account.where(number: n).first.id
+  end
+
   def save
     if valid?
       value = @value_f / (1.0 + @vat_percentage)
@@ -97,4 +111,10 @@ class BookingWithVat
     end
   end
 
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      b = BookingWithVat.new(row.to_hash.merge(business_year_id: BusinessYear.open.first.try(:id)))
+      b.save
+    end
+  end
 end

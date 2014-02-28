@@ -9,7 +9,9 @@ TinyBooks::Application.routes.draw do
     get :revert, on: :member
     post :import, on: :collection
   end
-  resources :booking_with_vats
+  resources :booking_with_vats do
+    post :import, on: :collection
+  end
   resources :accounts
   resources :business_years do
     resources :bookings

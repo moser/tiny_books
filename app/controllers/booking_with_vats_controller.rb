@@ -21,4 +21,13 @@ class BookingWithVatsController < ApplicationController
       render action: :new
     end
   end
+
+  def import
+    if params[:file_with_vat]
+      BookingWithVat.import(params[:file_with_vat])
+      redirect_to bookings_path, notice: "Import: OK"
+    else
+      redirect_to bookings_path
+    end
+  end
 end

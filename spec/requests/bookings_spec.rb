@@ -29,10 +29,24 @@ describe "The import feature" do
     FG.create(:account, number: 1)
     FG.create(:account, number: 2)
     attach_file("file", "#{Rails.root}/spec/import.csv")
-    click_button "Import"
+    click_button "Import Bookings"
     status_code.should == 200
     page.should have_text("Import: OK")
     Booking.count.should == 3
+  end
+
+
+  it "lets me import a csv file with bookings with VAT" do
+    visit bookings_path
+    FG.create(:business_year)
+    FG.create(:account, number: 1)
+    FG.create(:account, number: 2)
+    FG.create(:account, number: 3)
+    attach_file("file_with_vat", "#{Rails.root}/spec/import_with_vat.csv")
+    click_button "Import with VAT"
+    status_code.should == 200
+    page.should have_text("Import: OK")
+    Booking.count.should == 4
   end
 end
 

@@ -1,8 +1,16 @@
 .no-print
   .import
+    %h3
+      Import
     = form_tag import_bookings_path, multipart: true do |f|
       = file_field_tag :file
-      = submit_tag 'Import'
+      = submit_tag 'Import Bookings'
+  .import
+    %h3
+      Import (with VAT)
+    = form_tag import_booking_with_vats_path, multipart: true do |f|
+      = file_field_tag :file_with_vat
+      = submit_tag 'Import with VAT'
   = link_to "New", new_booking_path, class: "btn"
   = link_to "By account", index_by_account_bookings_path, class: "btn"
   = link_to "PDF", bookings_path(format: :pdf), class: "btn"

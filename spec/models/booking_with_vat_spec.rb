@@ -101,4 +101,18 @@ describe BookingWithVat do
       BookingWithVat.l(:value_f).should == "Value f"
     end
   end
+
+  describe ".import" do
+    it "creates a booking for each line in the CSV" do
+      FG.create(:business_year)
+      FG.create(:account, number: 1)
+      FG.create(:account, number: 2)
+      FG.create(:account, number: 3)
+      BookingWithVat.import(File.new("#{Rails.root}/spec/import_with_vat.csv"))
+      Booking.count.should == 4
+      Account.where(number: 3).first.balance_f.should == -0.26
+    end
+  end
+
+
 end
