@@ -123,11 +123,11 @@ de:
       delimiter: '.'
     currency:
       format:
-        unit: 'EUR'
-        format: '%n%u'
-        separator: 
-        delimiter: 
-        precision: 
+        unit: '€'
+        format: '%n %u'
+        separator: ','
+        delimiter: '.'
+        precision: 2
     percentage:
       format:
         delimiter: ""

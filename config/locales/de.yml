@@ -1,0 +1,13 @@
+de:
+  activerecord:
+    models:
+      booking: Buchung
+    attributes:
+      booking:
+        from_account: Soll
+        to_account: Haben
+        value_f: Betrag
+        value: Betrag
+        text: Buchungstext
+        booking_date: Datum
+        voucher_number: Belegnummer

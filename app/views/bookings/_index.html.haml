@@ -11,7 +11,7 @@
   %tbody
     - bookings.each do |booking| 
       %tr.booking
-        %td= booking.booking_date
+        %td=l booking.booking_date
         %td= booking.voucher_number
         %td= booking.text
         %td= format_account(booking.from_account)
