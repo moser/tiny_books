@@ -8,7 +8,7 @@ gem "haml-rails"
 gem "simple_form"
 gem "devise"
 gem "responders"
-gem "wicked_pdf"
+gem "wicked_pdf", '0.10.2'
 
 group :production do
   gem 'pg'
