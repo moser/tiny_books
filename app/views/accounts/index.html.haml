@@ -18,7 +18,7 @@
         %td.no-print
           = account.kind
         - if @include_balance
-          %td= format_currency(account.balance)
+          %td= format_currency(account.balance_f)
         %td.no-print
           = link_to "Show", account_path(account)
           = link_to "Edit", edit_account_path(account)
