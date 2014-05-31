@@ -1,16 +1,24 @@
-= link_to "New", new_account_path
+.no-print
+  = link_to "New", new_account_path
+  = link_to "PDF", accounts_path(format: :pdf)
 %table.table.table-striped
   %thead
     %th= Account.l(:number)
     %th= Account.l(:name)
-    %th= Account.l(:kind)
+    %th.no-print
+      = Account.l(:kind)
+    - if @include_balance
+      %th= Account.l(:balance)
     %th
   %tbody
     - @accounts.each do |account|
       %tr.account
         %td= account.number
         %td= account.name
-        %td= account.kind
-        %td
+        %td.no-print
+          = account.kind
+        - if @include_balance
+          %td= format_currency(account.balance)
+        %td.no-print
           = link_to "Show", account_path(account)
           = link_to "Edit", edit_account_path(account)

@@ -3,6 +3,17 @@ class AccountsController < ApplicationController
 
   def index
     @accounts = Account.all
+    @include_balance = !!params[:balance]
+    respond_to do |f|
+      f.html
+      f.pdf do 
+        render pdf: "accounts",
+               formats: [:html],
+               disable_internal_links: true,
+               disable_external_links: true,
+               dpi: "90"
+      end
+    end
   end
 
   def show

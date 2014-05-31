@@ -2,6 +2,7 @@ de:
   activerecord:
     models:
       booking: Buchung
+      account: Konto
     attributes:
       booking:
         from_account: Soll
@@ -11,3 +12,6 @@ de:
         text: Buchungstext
         booking_date: Datum
         voucher_number: Belegnummer
+      account:
+        number: Nummer
+        balance: Saldo
